@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.testdeps/
+logs/*.log
+exports/*.csv
+reports/*.csv

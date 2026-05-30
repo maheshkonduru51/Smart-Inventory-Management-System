@@ -1,250 +1,152 @@
-# Smart-Inventory-Management-System
+# Smart Inventory Management System
 
+## Project Overview
 
-A Python-based Inventory Management System designed for small businesses to efficiently manage products, stock levels, sales transactions, and inventory reports. The application follows Object-Oriented Programming (OOP) principles and uses SQLite for persistent data storage.
+Smart Inventory Management System is a production-style Python application for
+small businesses to manage products, stock, sales, low-stock alerts, and CSV
+reports. It uses SQLite for persistence and a modular object-oriented design
+that is easy to test, extend, and discuss in interviews.
 
 ## Features
 
-### Product Management
+- Admin login with password validation and session management
+- Product management: add, update, delete, search, and list products
+- Inventory tracking with quantity updates and availability checks
+- Sales transactions that automatically reduce stock
+- Sales history and total revenue calculation
+- Inventory, sales, and revenue reports
+- CSV export for reports
+- Low-stock alerts when quantity is below 10
+- Exception handling for invalid input, missing products, negative quantities,
+  insufficient stock, and database errors
+- File-based logging for operations, errors, and transactions
 
-* Add new products
-* Update existing products
-* Delete products
-* Search products
-* View complete inventory
+## Installation Steps
 
-### Inventory Tracking
+1. Create and activate a virtual environment:
 
-* Real-time stock monitoring
-* Product availability checking
-* Automatic inventory updates
-* Low-stock alerts
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate
+   ```
 
-### Sales Management
+2. Install dependencies:
 
-* Record sales transactions
-* Automatic stock deduction
-* Sales history tracking
-* Revenue calculation
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### Reporting
+## How to Run
 
-* Inventory reports
-* Sales reports
-* Revenue summaries
-* CSV export functionality
-
-### Security & Reliability
-
-* User authentication
-* Input validation
-* Exception handling
-* Activity logging
-* Database integrity checks
-
----
-
-## Technology Stack
-
-* Python 3.x
-* SQLite Database
-* Object-Oriented Programming (OOP)
-* PyTest
-* Git & GitHub
-* Logging Module
-* CSV Reporting
-
----
-
-## OOP Concepts Implemented
-
-### Encapsulation
-
-Protects sensitive product and user information using private attributes.
-
-### Inheritance
-
-Admin and User classes inherit common functionality.
-
-### Polymorphism
-
-Different report types implement common report generation methods.
-
-### Abstraction
-
-Abstract classes define common behavior for report generation and management modules.
-
----
-
-## Project Structure
-
-
-SmartInventorySystem/
-│
-├── main.py
-├── database.py
-├── config.py
-├── requirements.txt
-├── README.md
-│
-├── models/
-│   ├── product.py
-│   ├── user.py
-│   └── sale.py
-│
-├── services/
-│   ├── inventory_service.py
-│   ├── sales_service.py
-│   └── report_service.py
-│
-├── utils/
-│   ├── logger.py
-│   ├── validators.py
-│   └── helpers.py
-│
-├── tests/
-│   ├── test_inventory.py
-│   ├── test_sales.py
-│   └── test_reports.py
-│
-├── data/
-│   └── inventory.db
-│
-└── exports/
-    └── reports/
-
-
-
-
-## Installation
-
-### Clone Repository
-
-```bash
-git clone https://github.com/maheshkonduru51/smart-inventory-management-system.git
-```
-
-### Navigate to Project Directory
-
-```bash
-cd smart-inventory-management-system
-```
-
-### Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Running the Application
-
-Run the application using:
+Start the CLI app from the project folder:
 
 ```bash
 python main.py
 ```
 
-If using Streamlit:
+Default admin credentials:
+
+- Username: `admin`
+- Password: `Admin@123`
+
+The application creates the SQLite database automatically at
+`data/inventory.db`.
+
+## How to Run in Browser with Streamlit
+
+Create and activate the local virtual environment:
 
 ```bash
-streamlit run app.py
+python -m venv .venv
+.venv\Scripts\activate
 ```
 
----
+Install dependencies inside the virtual environment:
 
-## Sample Workflow
+```bash
+pip install -r requirements.txt
+```
 
-1. Login as Admin
-2. Add Products
-3. Update Stock Quantities
-4. Record Sales
-5. Generate Inventory Reports
-6. Export Reports to CSV
-7. Monitor Low-Stock Alerts
+Start the browser dashboard with either command:
 
----
+```bash
+streamlit run streamlit_app.py
+```
 
-## Database Schema
+```powershell
+.\run_streamlit.ps1
+```
 
-### Products Table
+Then open the local URL shown in the terminal, usually:
 
-| Field        | Type    |
-| ------------ | ------- |
-| product_id   | INTEGER |
-| product_name | TEXT    |
-| category     | TEXT    |
-| quantity     | INTEGER |
-| price        | REAL    |
-| created_date | DATE    |
+```text
+http://localhost:8501
+```
 
-### Sales Table
+Use the same default admin credentials:
 
-| Field         | Type    |
-| ------------- | ------- |
-| sale_id       | INTEGER |
-| product_id    | INTEGER |
-| quantity_sold | INTEGER |
-| sale_amount   | REAL    |
-| sale_date     | DATE    |
+- Username: `admin`
+- Password: `Admin@123`
 
-### Users Table
+## How to Test
 
-| Field    | Type    |
-| -------- | ------- |
-| user_id  | INTEGER |
-| username | TEXT    |
-| password | TEXT    |
-
----
-
-## Testing
-
-Run unit tests:
+Run the PyTest suite:
 
 ```bash
 pytest
 ```
 
----
+## Screenshots Section
 
-## Key Learning Outcomes
+Add screenshots here after running the CLI, such as:
 
-* Object-Oriented Programming
-* Python Application Development
-* SQLite Database Integration
-* Software Design Principles
-* Exception Handling
-* Logging and Monitoring
-* Unit Testing with PyTest
-* Git Version Control
-* SDLC and Agile Development Practices
+- Admin login screen
+- Product list output
+- Low-stock warning
+- CSV export confirmation
 
----
+## Technologies Used
+
+- Python 3.12+
+- SQLite
+- Object-Oriented Programming
+- PyTest
+- Python logging module
+- CSV module
+
+## OOP Concepts Used
+
+- Classes and objects: `Product`, `Sale`, `User`, `Admin`,
+  `InventoryManager`, `SalesManager`, and `ReportGenerator`
+- Encapsulation: service classes hide database logic behind clear methods
+- Inheritance: `Admin` extends `User`
+- Polymorphism: `ReportGenerator` implements the `BaseReport.generate` method
+- Abstraction: `User` defines an abstract `role` contract
+
+## Project Structure
+
+```text
+SmartInventorySystem/
+├── main.py
+├── database.py
+├── config.py
+├── requirements.txt
+├── README.md
+├── models/
+├── services/
+├── utils/
+├── tests/
+├── data/
+├── exports/
+└── reports/
+```
 
 ## Future Enhancements
 
-* Web-based Dashboard
-* Role-Based Access Control
-* Email Notifications
-* Barcode Integration
-* Cloud Database Support
-* Inventory Forecasting
-* REST API Integration
-* Docker Deployment
-
----
-
-## Author
-
-**Mahesh Raju Konduru**
-
-* GitHub: https://github.com/maheshkonduru51
-* LinkedIn: https://www.linkedin.com/in/mahesh-raju-konduru-a0b5002a5/
-
----
-
-## License
-
-This project is licensed under the MIT License.
+- Role-based permissions beyond the admin role
+- Web dashboard with charts
+- Barcode scanning support
+- Import products from CSV
+- PDF report exports
+- Cloud database support
+- Strong password hashing with Argon2 or bcrypt
